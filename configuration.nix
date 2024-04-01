@@ -145,30 +145,6 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  systemd.services.postActivation = {
-    description = "Push NixOS configuration to GitHub after activation";
-    wantedBy = [ "multi-user.target" ];
-    script = ''
-      #!/bin/bash
-
-      # Change to your NixOS configuration directory
-      cd /etc/nixos
-
-      # Add only .nix files to Git
-      /run/current-system/sw/bin/git add *.nix
-
-      # Check if there are changes to commit
-      if /run/current-system/sw/bin/git diff --quiet --exit-code; then
-        echo "No changes to commit."
-      else
-        # Commit changes with a timestamp
-        /run/current-system/sw/bin/git commit -m "Automatic NixOS configuration update - $(date +%Y-%m-%d_%H-%M-%S)"
-        # Push changes to GitHub
-        /run/current-system/sw/bin/git push origin master
-      fi
-    '';
-  };
-
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
