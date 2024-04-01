@@ -13,6 +13,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
   ## TODO: grub EFI instead of systemd-boot ??
 
   networking.hostName = "richardnixxon"; # Define your hostname.
@@ -95,7 +96,7 @@
   users.users.matt = {
     isNormalUser = true;
     description = "matt";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "scanner"];
     shell = pkgs.zsh;
     # user packages go buhbye
     # packages = with pkgs; [ ];
@@ -116,8 +117,9 @@
      firefox
      thunderbird
      discord
-     pkgs.gnome.gnome-tweaks # why tf is this in pkgs.gnome but below isn't ??
+     usbutils
      gnome-extension-manager
+     pkgs.gnome.gnome-tweaks # why tf is this in pkgs.gnome but below isn't ??
      pkgs.gnomeExtensions.dash-to-dock
      pkgs.gnomeExtensions.caffeine
      pkgs.vscode-fhs
@@ -132,11 +134,16 @@
   # };
 
   programs.zsh.enable = true;
-
+  
+  programs.git.enable = true;
+  
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
+
+  services.fwupd.enable = true;  
+  services.fprintd.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
