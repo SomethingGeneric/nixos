@@ -132,7 +132,6 @@
   # };
 
   programs.zsh.enable = true;
-  programs.git.enable = true;
 
   # List services that you want to enable:
 
