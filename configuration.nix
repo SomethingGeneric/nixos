@@ -5,16 +5,15 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [ 
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  ## TODO: grub EFI instead of systemd-boot ??
+  ## TODO: grub EFI instead of systemd-boot
 
   networking.hostName = "richardnixxon"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -68,9 +67,6 @@
     xkbVariant = "";
   };
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
@@ -115,13 +111,16 @@
      git
      neofetch
      firefox
+     chromium
      thunderbird
      discord
      usbutils
+     signal-desktop
      gnome-extension-manager
      pkgs.gnome.gnome-tweaks # why tf is this in pkgs.gnome but below isn't ??
      pkgs.gnomeExtensions.dash-to-dock
      pkgs.gnomeExtensions.caffeine
+     pkgs.gnomeExtensions.gsconnect
      pkgs.vscode-fhs
   ];
 
@@ -144,6 +143,8 @@
 
   services.fwupd.enable = true;  
   services.fprintd.enable = true;
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
