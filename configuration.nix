@@ -5,9 +5,9 @@
 
 {
   imports = [ 
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./hacker.nix
+    ./games.nix
   ];
 
   # -----------
@@ -128,13 +128,10 @@
      usbutils
      signal-desktop
      gnome-extension-manager
-     vitetris
-     moon-buggy
-     steam
      obsidian
      pkgs.vscode-fhs
      slack
-     
+
      # gnome suffering
      pkgs.gnome.gnome-tweaks # why tf is this in pkgs.gnome but below isn't ??
      pkgs.gnomeExtensions.dash-to-dock
