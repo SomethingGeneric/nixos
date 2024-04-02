@@ -10,10 +10,17 @@
     ./hardware-configuration.nix
   ];
 
+  # -----------
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
+  # Goodbye systemd-boot
+  # boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  ## TODO: grub EFI instead of systemd-boot
+  # Grub
+  boot.loader.grub.enable = true;
+  boot.loader.grub.efiSupport = true;
+  boot.loader.grub.devices = ["nodev"]; 
+  boot.loader.grub.useOSProber = true;
+  # -----------
 
   networking.hostName = "richardnixxon"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -53,7 +60,6 @@
   	'';
   	extraGSettingsOverridePackages = [ pkgs.gnome.mutter ];
   };
-
   nixpkgs.config.firefox.enableGnomeExtensions = true;
   services.gnome.gnome-browser-connector.enable = true;
 
@@ -85,6 +91,7 @@
   };
 
   # NOTE: doesn't seem to be needed when GNOME
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -100,6 +107,10 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-25.9.0" # Required for obsidian
+  ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -117,11 +128,16 @@
      usbutils
      signal-desktop
      gnome-extension-manager
+     vitetris
+     moon-buggy
+     steam
+     obsidian
+     pkgs.vscode-fhs
+     # gnome suffering
      pkgs.gnome.gnome-tweaks # why tf is this in pkgs.gnome but below isn't ??
      pkgs.gnomeExtensions.dash-to-dock
      pkgs.gnomeExtensions.caffeine
      pkgs.gnomeExtensions.gsconnect
-     pkgs.vscode-fhs
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -133,13 +149,12 @@
   # };
 
   programs.zsh.enable = true;
-  
   programs.git.enable = true;
   
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   services.fwupd.enable = true;  
   services.fprintd.enable = true;
@@ -147,7 +162,7 @@
   services.printing.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 22 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
