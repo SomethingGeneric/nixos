@@ -105,7 +105,6 @@
      git
      neofetch
      firefox
-     chromium
      thunderbird
      discord
      usbutils
@@ -136,6 +135,8 @@
   services.fprintd.enable = true;
   # Enable CUPS to print documents.
   services.printing.enable = true;
+
+  environment.variables.EDITOR = "micro";
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 ];
