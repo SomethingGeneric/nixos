@@ -9,6 +9,7 @@
     ./hacker.nix
     ./games.nix
     ./gnome.nix
+    # ./cinnamon.nix
   ];
 
   # -----------
@@ -113,6 +114,8 @@
      obsidian
      pkgs.vscode-fhs
      slack
+     obs-studio
+     mullvad-vpn
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

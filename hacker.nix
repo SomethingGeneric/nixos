@@ -10,7 +10,8 @@
      hashcat
      john # (unshadow?)
      wireshark
-     
+     remmina
+     virt-viewer     
   ];
 
 }
