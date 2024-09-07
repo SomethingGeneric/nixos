@@ -12,6 +12,14 @@
      wireshark
      remmina
      virt-viewer     
+     iperf
+     ghidra-bin
+     qFlipper
+     android-tools
+     dig
+     gnumake
+     gtk3
+     
   ];
 
 }

@@ -31,7 +31,7 @@
   networking.networkmanager.enable = true;
 
   # Set your time zone.
-  time.timeZone = "America/New_York";
+  time.timeZone = "Europe/Dublin";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -83,7 +83,7 @@
   users.users.matt = {
     isNormalUser = true;
     description = "matt";
-    extraGroups = [ "networkmanager" "wheel" "scanner"];
+    extraGroups = [ "networkmanager" "wheel" "scanner" "docker"];
     shell = pkgs.zsh;
     # user packages go buhbye
     # packages = with pkgs; [ ];
@@ -101,6 +101,7 @@
   environment.systemPackages = with pkgs; [
      wget
      micro
+     unzip
      zsh
      curl
      git
@@ -116,15 +117,26 @@
      slack
      obs-studio
      mullvad-vpn
+     sshs
+     chromium
+     python3Full
+     python311Packages.pygobject3
+     gobject-introspection
+     gimp
+     pkgs.lexend
+     pipx
+     cura
   ];
+
+  virtualisation.docker.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  programs.mtr.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
 
   programs.zsh.enable = true;
   programs.git.enable = true;
@@ -133,7 +145,8 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-
+  services.mullvad-vpn.enable = true;
+  services.tailscale.enable = true;
   services.fwupd.enable = true;  
   services.fprintd.enable = true;
   # Enable CUPS to print documents.
