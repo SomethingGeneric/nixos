@@ -25,5 +25,6 @@
     pkgs.gnomeExtensions.dash-to-dock
     pkgs.gnomeExtensions.caffeine
     pkgs.gnomeExtensions.gsconnect
+    pkgs.gnome-builder
   ];
 }

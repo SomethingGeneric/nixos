@@ -1,15 +1,14 @@
 { config, pkgs, ... }:
 
-# Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running 'nixos-help').
-
+let 
+  sysconfig = pkgs.lib.trivial.importTOML ./sysconfig.toml;
+in
 {
   imports = [ 
     ./hardware-configuration.nix
     ./hacker.nix
     ./games.nix
     ./gnome.nix
-    # ./cinnamon.nix
   ];
 
   # -----------
@@ -22,30 +21,28 @@
   boot.loader.grub.efiSupport = true;
   boot.loader.grub.devices = ["nodev"]; 
   boot.loader.grub.useOSProber = true;
-  # -----------
-
-  networking.hostName = "richardnixxon"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Enable networking (and wifi!)
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
-  time.timeZone = "Europe/Dublin";
+  # -----------
+
+  networking.hostName = sysconfig.hostname;
+  time.timeZone = sysconfig.timezone;
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = sysconfig.locale;
 
   i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
+    LC_ADDRESS = sysconfig.locale;
+    LC_IDENTIFICATION = sysconfig.locale;
+    LC_MEASUREMENT = sysconfig.locale;
+    LC_MONETARY = sysconfig.locale;
+    LC_NAME = sysconfig.locale;
+    LC_NUMERIC = sysconfig.locale;
+    LC_PAPER = sysconfig.locale;
+    LC_TELEPHONE = sysconfig.locale;
+    LC_TIME = sysconfig.locale;
   };
 
   # Enable the X11 windowing system.
@@ -85,7 +82,6 @@
     description = "matt";
     extraGroups = [ "networkmanager" "wheel" "scanner" "docker"];
     shell = pkgs.zsh;
-    # user packages go buhbye
     # packages = with pkgs; [ ];
   };
 
@@ -99,6 +95,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+     android-studio
      wget
      micro
      unzip
@@ -120,12 +117,11 @@
      sshs
      chromium
      python3Full
-     python311Packages.pygobject3
-     gobject-introspection
      gimp
      pkgs.lexend
      pipx
      cura
+     /nix/store/yhq7f5p6hx7ny82ixmfsh6sm7b91p2xc-nstall-0.2.0
   ];
 
   virtualisation.docker.enable = true;

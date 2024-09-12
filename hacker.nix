@@ -18,7 +18,6 @@
      android-tools
      dig
      gnumake
-     gtk3
      
   ];
 
