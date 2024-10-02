@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let 
   sysconfig = pkgs.lib.trivial.importTOML ./sysconfig.toml;
@@ -9,6 +9,7 @@ in
     ./hacker.nix
     ./games.nix
     ./gnome.nix
+    ./nstall.nix
   ];
 
   # -----------
@@ -97,7 +98,6 @@ in
   environment.systemPackages = with pkgs; [
      android-studio
      wget
-     micro
      unzip
      zsh
      curl
@@ -105,7 +105,6 @@ in
      neofetch
      firefox
      thunderbird
-     discord
      usbutils
      signal-desktop
      gnome-extension-manager
@@ -121,7 +120,8 @@ in
      pkgs.lexend
      pipx
      cura
-     /nix/store/yhq7f5p6hx7ny82ixmfsh6sm7b91p2xc-nstall-0.2.0
+     openssl
+     /nix/store/hmrd05cdl05qc5nxs1n7wf9w202k01bd-nstall-0.2.2
   ];
 
   virtualisation.docker.enable = true;
@@ -149,7 +149,9 @@ in
   services.printing.enable = true;
 
   environment.variables.EDITOR = "micro";
-
+  environment.variables.OPENSSL_DEV=pkgs.openssl.dev;
+  environment.variables.PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig:" + (builtins.getEnv "PKG_CONFIG_PATH");
+  
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
