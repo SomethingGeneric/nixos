@@ -8,8 +8,8 @@ in
     ./hardware-configuration.nix
     ./hacker.nix
     ./games.nix
-    # ./gnome.nix
-    ./cosmic.nix
+    ./gnome.nix
+    # ./cosmic.nix
     ./nstall.nix
   ];
 
