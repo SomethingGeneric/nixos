@@ -13,6 +13,7 @@
    	'';
   	extraGSettingsOverridePackages = [ pkgs.gnome.mutter ];
   };
+
   nixpkgs.config.firefox.enableGnomeExtensions = true;
   services.gnome.gnome-browser-connector.enable = true;
   
