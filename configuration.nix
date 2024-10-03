@@ -8,7 +8,7 @@ in
     ./hardware-configuration.nix
     ./hacker.nix
     ./games.nix
-    ./gnome.nix
+    # ./gnome.nix
     ./nstall.nix
   ];
 
@@ -124,12 +124,9 @@ in
      cura
      openssl
      /nix/store/hmrd05cdl05qc5nxs1n7wf9w202k01bd-nstall-0.2.2
-<<<<<<< HEAD
-=======
      pkgs.jetbrains.idea-community-bin
      jdk22
      pkgs.libglvnd
->>>>>>> 2b7fba5 (FLAKES!)
   ];
 
   virtualisation.docker.enable = true;
@@ -159,15 +156,11 @@ in
   environment.variables.EDITOR = "micro";
   environment.variables.OPENSSL_DEV=pkgs.openssl.dev;
   environment.variables.PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig:" + (builtins.getEnv "PKG_CONFIG_PATH");
-<<<<<<< HEAD
-  
-=======
   environment.variables.LD_LIBRARY_PATH = lib.makeLibraryPath [pkgs.libglvnd];
   
   
   hardware.opengl.enable = true;
 
->>>>>>> 2b7fba5 (FLAKES!)
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
