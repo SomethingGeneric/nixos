@@ -9,6 +9,7 @@ in
     ./hacker.nix
     ./games.nix
     # ./gnome.nix
+    ./cosmic.nix
     ./nstall.nix
   ];
 
@@ -49,13 +50,13 @@ in
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  #services.xserver.enable = true;
 
   # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
-  };
+  #services.xserver = {
+  #  layout = "us";
+  #  xkbVariant = "";
+  #};
 
   # Enable sound with pipewire.
   sound.enable = true;
