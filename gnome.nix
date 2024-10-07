@@ -14,8 +14,8 @@
   	extraGSettingsOverridePackages = [ pkgs.gnome.mutter ];
   };
 
-  nixpkgs.config.firefox.enableGnomeExtensions = true;
-  services.gnome.gnome-browser-connector.enable = true;
+  #nixpkgs.config.firefox.enableGnomeExtensions = true;
+  #services.gnome.gnome-browser-connector.enable = true;
   
   # TODO: this is to mitigate a dep warning by the firefox extensions line above
   # but clearly i misunderstand the syntax because it doesn't work lol

@@ -1,16 +1,12 @@
 { config, pkgs, lib, ... }:
 
-let 
-  sysconfig = pkgs.lib.trivial.importTOML ./sysconfig.toml;
-in
 {
   imports = [ 
     ./hardware-configuration.nix
     ./hacker.nix
     ./games.nix
     ./gnome.nix
-    # ./cosmic.nix
-    ./nstall.nix
+    #./nstall.nix
   ];
 
   # -----------
@@ -29,34 +25,34 @@ in
 
   # -----------
 
-  networking.hostName = sysconfig.hostname;
-  time.timeZone = sysconfig.timezone;
+  networking.hostName = "richardnixxon";
+  time.timeZone = "Europe/Dublin";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = sysconfig.locale;
+  i18n.defaultLocale = "en_US.UTF-8";
 
   i18n.extraLocaleSettings = {
-    LC_ADDRESS = sysconfig.locale;
-    LC_IDENTIFICATION = sysconfig.locale;
-    LC_MEASUREMENT = sysconfig.locale;
-    LC_MONETARY = sysconfig.locale;
-    LC_NAME = sysconfig.locale;
-    LC_NUMERIC = sysconfig.locale;
-    LC_PAPER = sysconfig.locale;
-    LC_TELEPHONE = sysconfig.locale;
-    LC_TIME = sysconfig.locale;
+    LC_ADDRESS = "en_US.UTF-8";
+    LC_IDENTIFICATION = "en_US.UTF-8";
+    LC_MEASUREMENT = "en_US.UTF-8";
+    LC_MONETARY = "en_US.UTF-8";
+    LC_NAME = "en_US.UTF-8";
+    LC_NUMERIC = "en_US.UTF-8";
+    LC_PAPER = "en_US.UTF-8";
+    LC_TELEPHONE = "en_US.UTF-8";
+    LC_TIME = "en_US.UTF-8";
   };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Enable the X11 windowing system.
-  #services.xserver.enable = true;
+  services.xserver.enable = true;
 
   # Configure keymap in X11
-  #services.xserver = {
-  #  layout = "us";
-  #  xkbVariant = "";
-  #};
+  services.xserver = {
+    layout = "us";
+    xkbVariant = "";
+  };
 
   # Enable sound with pipewire.
   sound.enable = true;
@@ -128,6 +124,14 @@ in
      pkgs.jetbrains.idea-community-bin
      jdk22
      pkgs.libglvnd
+     alsa-lib
+     micro
+     discord
+     rustup
+     gcc49
+     pkg-config
+     cmake
+     vesktop
   ];
 
   virtualisation.docker.enable = true;
@@ -156,7 +160,7 @@ in
 
   environment.variables.EDITOR = "micro";
   environment.variables.OPENSSL_DEV=pkgs.openssl.dev;
-  environment.variables.PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig:" + (builtins.getEnv "PKG_CONFIG_PATH");
+  environment.variables.PKG_CONFIG_PATH = "${pkgs.alsa-lib.dev}/lib/pkgconfig:" + "${pkgs.openssl.dev}/lib/pkgconfig:" + (builtins.getEnv "PKG_CONFIG_PATH");
   environment.variables.LD_LIBRARY_PATH = lib.makeLibraryPath [pkgs.libglvnd];
   
   
