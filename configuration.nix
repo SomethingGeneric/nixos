@@ -6,7 +6,7 @@
     ./hacker.nix
     ./games.nix
     ./gnome.nix
-    #./nstall.nix
+    ./nstall.nix
   ];
 
   # -----------
@@ -120,7 +120,6 @@
      pipx
      cura
      openssl
-     /nix/store/hmrd05cdl05qc5nxs1n7wf9w202k01bd-nstall-0.2.2
      pkgs.jetbrains.idea-community-bin
      jdk22
      pkgs.libglvnd
@@ -132,6 +131,7 @@
      pkg-config
      cmake
      vesktop
+     /nix/store/hmrd05cdl05qc5nxs1n7wf9w202k01bd-nstall-0.2.2
   ];
 
   virtualisation.docker.enable = true;
