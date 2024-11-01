@@ -11,7 +11,7 @@
    	  [org.gnome.mutter]
    	  experimental-features=['scale-monitor-framebuffer']
    	'';
-  	extraGSettingsOverridePackages = [ pkgs.gnome.mutter ];
+  	extraGSettingsOverridePackages = [ pkgs.mutter ];
   };
 
   #nixpkgs.config.firefox.enableGnomeExtensions = true;
@@ -22,7 +22,7 @@
   # nativeMessagingHosts.packages = [ pkgs.gnome-browser-connector ];
 
   environment.systemPackages = with pkgs; [
-    pkgs.gnome.gnome-tweaks # why tf is this in pkgs.gnome but below isn't ??
+    pkgs.gnome-tweaks # why tf is this in pkgs.gnome but below isn't ??
     pkgs.gnomeExtensions.dash-to-dock
     pkgs.gnomeExtensions.caffeine
     pkgs.gnomeExtensions.gsconnect

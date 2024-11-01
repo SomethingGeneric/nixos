@@ -1,2 +1,0 @@
-[packages.nixpkgs]
-pks = [ "micro", "discord", "rustup", "gcc49", "pkg-config", "cmake", "vesktop",]

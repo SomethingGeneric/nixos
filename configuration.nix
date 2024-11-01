@@ -4,9 +4,9 @@
   imports = [ 
     ./hardware-configuration.nix
     ./hacker.nix
-    ./games.nix
+    # ./games.nix - fix in future
+    #./cosmic.nix
     ./gnome.nix
-    ./nstall.nix
   ];
 
   # -----------
@@ -49,13 +49,12 @@
   services.xserver.enable = true;
 
   # Configure keymap in X11
-  services.xserver = {
+  services.xserver.xkb = {
     layout = "us";
-    xkbVariant = "";
+    variant = "";
   };
 
   # Enable sound with pipewire.
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -127,11 +126,10 @@
      micro
      discord
      rustup
-     gcc49
      pkg-config
      cmake
      vesktop
-     /nix/store/hmrd05cdl05qc5nxs1n7wf9w202k01bd-nstall-0.2.2
+     signal-desktop
   ];
 
   virtualisation.docker.enable = true;
@@ -164,7 +162,7 @@
   environment.variables.LD_LIBRARY_PATH = lib.makeLibraryPath [pkgs.libglvnd];
   
   
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 ];
