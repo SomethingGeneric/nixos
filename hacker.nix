@@ -18,6 +18,8 @@
      android-tools
      dig
      gnumake
+     python312Packages.ipython
+     python312Packages.tkinter
      
   ];
 

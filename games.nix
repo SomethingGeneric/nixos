@@ -6,6 +6,8 @@
     moon-buggy
     steam     
     ckan
+    libretro.thepowdertoy
+    lutris
   ];
 
 

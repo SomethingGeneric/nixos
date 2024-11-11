@@ -4,9 +4,9 @@
   imports = [ 
     ./hardware-configuration.nix
     ./hacker.nix
-    # ./games.nix - fix in future
-    #./cosmic.nix
-    ./gnome.nix
+    ./games.nix
+    ./cosmic.nix
+    #./gnome.nix
   ];
 
   # -----------
@@ -45,8 +45,11 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  boot.initrd.kernelModules = ["amdgpu"];
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
+  services.xserver.videoDrivers = ["amdgpu"];
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -79,7 +82,7 @@
   users.users.matt = {
     isNormalUser = true;
     description = "matt";
-    extraGroups = [ "networkmanager" "wheel" "scanner" "docker"];
+    extraGroups = [ "networkmanager" "wheel" "scanner" "docker" "libvirtd"];
     shell = pkgs.zsh;
     # packages = with pkgs; [ ];
   };
@@ -117,7 +120,6 @@
      gimp
      pkgs.lexend
      pipx
-     cura
      openssl
      pkgs.jetbrains.idea-community-bin
      jdk22
@@ -130,9 +132,14 @@
      cmake
      vesktop
      signal-desktop
+     htop
+     btop
+     tmux
+     screen
+     librewolf
+     p7zip
+     dosbox-x
   ];
-
-  virtualisation.docker.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -145,12 +152,16 @@
   programs.zsh.enable = true;
   programs.git.enable = true;
   
+  virtualisation.docker.enable = true;
+
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
+
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
   services.mullvad-vpn.enable = true;
-  services.tailscale.enable = true;
   services.fwupd.enable = true;  
   services.fprintd.enable = true;
   # Enable CUPS to print documents.
@@ -163,6 +174,7 @@
   
   
   hardware.graphics.enable = true;
+  
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 ];
